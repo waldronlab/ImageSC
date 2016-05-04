@@ -1,0 +1,7 @@
+*.svs
+*.tiff
+.Rhistory
+.RData
+rawdata/*
+*.Rproj
+.Rproj.user
