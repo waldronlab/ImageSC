@@ -10,6 +10,7 @@ threshold = "otsu", numWindows = 4)
 display(segValues[[1]])
 display(segValues[[2]])
 
-writeImage(segValues[[2]], 
+writeImage(segValues[[2]], "rawdata/test/sample.png")
+
 
 
