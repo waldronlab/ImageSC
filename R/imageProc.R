@@ -1,16 +1,22 @@
 library(CRImage)
 library(EBImage)
 
-a <- readImage("rawdata/test/28_16.png")
-fp <- file.path("rawdata/test/28_16.png")
+fpatt <- "*.png"
+folders <- list.dirs(recursive = FALSE,
+					 path = file.path("rawdata"),
+					 full.names = FALSE)
 
-segValues <- segmentImage(filename = fp, maxShape = 800, minShape = 40, failureRegion = 2000,
-threshold = "otsu", numWindows = 4)
-
-display(segValues[[1]])
-display(segValues[[2]])
-
-writeImage(segValues[[2]], "rawdata/test/sample.png")
-
-
+for (i in folders) {
+	pngfiles <- dir(file.path("rawdata", folders[i]),
+					pattern = fpatt, full.names = TRUE)
+	featList <- lapply(pngfiles, function(img) {
+					   segmentImage(
+									filename = img,
+									maxShape = 800,
+									minShape = 40,
+									failureRegion = 2000,
+									threshold = "otsu",
+									numWindows = 4)$features
+					})
+}
 
