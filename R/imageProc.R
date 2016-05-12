@@ -2,19 +2,23 @@ library(CRImage)
 library(EBImage)
 
 args <- (commandArgs(TRUE))
-if (all(names(args) == c("maxShape", "minShape", "failureRegion", "numWindows", "pattern"))) {
+if (all(names(args) == c("maxShape", "minShape", "failureRegion", "numWindows", "pattern", "disease"))) {
 stop("supplied arguments must match segmentImage arguments and image search pattern\n",
-'\tc("maxShape", "minShape", "failureRegion", "numWindows", "pattern")')
+'\tc("maxShape", "minShape", "failureRegion", "numWindows", "pattern", "disease")')
 }
-args[1:4] <- lapply(args[1:4], as.numeric)
+
+numerics <- c("maxShape", "minShape", "failureRegion", "numWindows")
+args[numerics] <- lapply(args[numerics], as.numeric)
+
+disease <- args$disease
 
 ImgPattern <- args$pattern
 folders <- list.dirs(recursive = FALSE,
-                     path = file.path("rawdata"),
+                     path = file.path("rawdata", disease),
                      full.names = FALSE)
 
 for (i in folders) {
-    imgFiles <- dir(file.path("rawdata", folders[i]),
+    imgFiles <- dir(file.path("rawdata", disease, folders[i]),
                     pattern = ImgPattern, full.names = TRUE)
     featList <- lapply(imgFiles, function(img) {
                        segmentImage(
@@ -25,6 +29,8 @@ for (i in folders) {
                                     threshold = "otsu",
                                     numWindows = args$numWindows)$features
                     })
-    saveRDS(featList, file = paste0(folders[i], "_features", ".rds"), compress = "bzip2")
+    saveRDS(featList, file = file.path("rawdata", disease,
+                        paste0(folders[i], "_features", ".rds")),
+                        compress = "bzip2")
 }
 

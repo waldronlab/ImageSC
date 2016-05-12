@@ -1,7 +1,12 @@
 library(httr)
+library(xml2)
 
 args <- (commandArgs(TRUE))
 disease <- tolower(args$disease)
+
+if (!file.exists(file.path("rawdata", disease))) {
+    dir.create(file.path("rawdata", disease))
+}
 
 imgUrl <- paste0("https://tcga-data.nci.nih.gov/tcgafiles/ftp_auth/distro_ftpusers/anonymous/tumor/", 
 disease, "/bcr/nationwidechildrens.org/diagnostic_images/slide_images/")
@@ -19,7 +24,7 @@ linesRead <- linesRead[grep("nation", linesRead)]
 compressedImageFiles <- unname(grep("tar\\.gz$", linesRead, value = TRUE))
 
 ## Download file to memory
-for (i in seq_along(compresssedImage)) {
+for (i in seq_along(compressedImageFiles)) {
     GET(file.path(imgUrl, compressedImageFiles[i]),
         write_disk(file.path("rawdata", compressedImageFiles[i])))
 }
@@ -28,5 +33,5 @@ tarFiles <- list.files(path = "./rawdata", pattern = ".tar.gz", full.names = TRU
 for (i in tarFiles) {
     innerFiles <- untar(i, compressed = "gzip", list = TRUE)
     imageFiles <- grep("\\.svs$", innerFiles, value = TRUE)
-    untar(i, files = imageFiles, exdir = file.path("rawdata", imageFiles))
+    untar(i, files = imageFiles, exdir = file.path("rawdata", disease, imageFiles))
 }
