@@ -1,6 +1,6 @@
 #!/bin/bash
 
-R CMD BATCH --no-save --no-restore '--args disease="prad"' R/dlImages.R downloadLogs.out
+R CMD BATCH --no-save --no-restore '--args disease="prad" user="marcel.ramos"' R/dlImages.R downloadLogs.out
 
 ./TileSVS.sh 400 .png
 
