@@ -1,5 +1,9 @@
 #!/bin/bash
 
+oldDir=$(pwd)
+
+cd /scratch/${3}/
+
 shopt -s nullglob
 FILES=(*.svs)
 if [ ${#FILES[@]} -eq 0 ]; then 
@@ -25,5 +29,8 @@ else
         fi
     done
 fi
-echo "done"
 shopt -u nullglob
+
+cd ${oldDir}
+
+echo "done"
