@@ -2,4 +2,4 @@
 
 A repository for image analysis
 
-*ImageMagick is required for scripts to work
+*ImageMagick and Vips are required for scripts to work
