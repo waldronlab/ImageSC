@@ -11,8 +11,8 @@ user <- tolower(args$user)
 
 destDir <- file.path("/scratch/", user, disease)
 
-if (!file.exists(destdir)) {
-    dir.create(destdir)
+if (!file.exists(destDir)) {
+    dir.create(destDir)
 }
 
 imgUrl <- paste0("https://tcga-data.nci.nih.gov/tcgafiles/ftp_auth/distro_ftpusers/anonymous/tumor/", 

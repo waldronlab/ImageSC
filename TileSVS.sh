@@ -2,7 +2,7 @@
 
 oldDir=$(pwd)
 
-cd /scratch/${3}/
+cd /scratch/${3}/${4}/
 
 shopt -s nullglob
 FILES=(*.svs)
