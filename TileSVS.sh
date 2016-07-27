@@ -1,4 +1,9 @@
 #!/bin/bash
+# This script takes 4 arguments and are as follows:
+# 1. The pixel size of all of the sides in the tiles
+# 2. The suffix or file extension for the resulting image (usually png)
+# 3. The username folder inside "scratch"
+# 4. The cancer disease code (i.e., prad)
 
 oldDir=$(pwd)
 

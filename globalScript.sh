@@ -1,4 +1,6 @@
 #!/bin/bash
+# This script is meant to delegate the arguments to other R scripts and shell scripts.
+# Use this script. 
 
 R CMD BATCH --no-save --no-restore '--args disease="prad" user="marcel.ramos"' R/dlImages.R downloadLogs.out
 
