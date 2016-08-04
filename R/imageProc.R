@@ -23,6 +23,7 @@ folders <- list.dirs(recursive = FALSE,
 for (i in folders) {
     imgFiles <- dir(file.path("/scratch", user, disease, folders[i]),
                     pattern = ImgPattern, full.names = TRUE)
+    names(imgFiles) <- basename(imgFiles)
     featList <- lapply(imgFiles, function(img) {
                        segmentImage(
                                     filename = img,
