@@ -22,7 +22,7 @@ else
         else
             mkdir ${FOLDER}
             echo "$i -> ${FOLDER}"
-            vips dzsave ${i} ${FOLDER}/ --suffix ${2} --tile-size ${1} --depth 1
+            vips dzsave ${i} ${FOLDER}/ --depth one --suffix ${2} --tile-size ${1} --overlap 0
             cd ./${FOLDER}/${FOLDER}_files/0
             shopt -s dotglob
             mv -- * ../..
