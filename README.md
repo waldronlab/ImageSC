@@ -2,4 +2,18 @@
 
 A repository for image analysis
 
-*ImageMagick and Vips are required for scripts to work
+Programs required to run scripts: 
+
+* `imagemagick`
+* `vips`
+
+Install ImageMagic from aptitude
+
+```
+apt-get install imagemagick
+```
+Install Vips (Linux) Web page
+
+```
+http://www.vips.ecs.soton.ac.uk/index.php?title=Build_on_Ubuntu
+```
